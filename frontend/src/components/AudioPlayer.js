@@ -5,8 +5,13 @@ const AudioPlayer = ({ audioUrl }) => {
 
   useEffect(() => {
     if (audioUrl && audioRef.current) {
+      console.log("AudioPlayer: New audio URL received:", audioUrl);
       audioRef.current.src = audioUrl;
-      audioRef.current.play();
+      audioRef.current.play().then(() => {
+        console.log("AudioPlayer: Audio playback started.");
+      }).catch((error) => {
+        console.error("AudioPlayer: Error during playback:", error);
+      });
     }
   }, [audioUrl]);
 
